@@ -41,7 +41,11 @@ module.exports = function (model, id, update, callback, hexo) {
     full_source = prev_full;
   if (update.source && update.source !== post.source) {
     // post.full_source only readable ~ see: /hexo/lib/models/post.js
+    var date = moment(compiled.date).format('YYYY-MM-DD-');
     full_source = hexo.source_dir + update.source
+    if (full_source.indexOf('_posts') > -1 && full_source.indexOf(date) === -1) {
+      full_source = full_source.replace('_posts/', '_posts/' + date);
+    }
   }
 
   preservedKeys.forEach(function (attr) {
