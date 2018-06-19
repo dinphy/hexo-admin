@@ -1,29 +1,80 @@
 ![logo](docs/logo.png?raw=true)
 
-An admin UI for the [Hexo blog engine](http://hexo.io). Based off of the [Ghost](http://ghost.org) interface, with inspiration from [svbtle](http://svbtle.com) and [prose.io](http://prose.io).
+An admin UI for the [Hexo blog engine](http://hexo.io). Based on the [Ghost](http://ghost.org) interface, with inspiration from [svbtle](http://svbtle.com) and [prose.io](http://prose.io).
+
+## Enhanced Version For hexo-admin plugin on:
+
+- dependencies fix for hexo-fs;
+- editor enhancement for image upload and select;
+- use deploy button to generate static files locally;
+- fix preview link opening;
+- multi language support
+- todos...
+
+## Plugin Code Structure
+
+```
+
+|- client : front end code for this admin UI and content manage
+|    |- run.js : build bundle.js entrance
+|    |- api folder  : front router mapping principles with baseUrl config
+|    |- less folder : each component style included by less/index.less
+|    |- app.js : menu bar
+|    |- index.js : root component inited by run.js, admin(node)
+|    |- router.js : each admin module navigation corresponding component
+|    |- ... :
+|- index.js : plugin load entry by hexo blog
+|- api.js   : blog related data processing, save/read...
+|- upload.js: handle multi image file upload
+
+```
+
+## Local client Development Workflow
+
+- start your local hexo blog
+- run 'gulp build' in the plugin root directory for client source change
+- made some changes in client source
+- cp www/bundle.js www/bundle.css into your local hexo blog/node_modules/hexo-admin-ehc/www
+- refresh http://localhost:4000/admin
+
+## Local api Development Workflow
+
+- cd plugin root directory
+- change api.js logic
+- cp api.js into your local hexo blog/node_modules/hexo-admin/
+- restart hexo blog to reload plugin service
+
+## Running hexo blog in Daemon
+
+- create a shell script, start.sh:
+
+```
+#!/bin/bash
+
+hexo server --silent
+```
+
+- run the script in the blog root directory
+
+```
+$ nohup ./start.sh &
+$ exit
+```
+
 
 ## Hexo Version
 
 For 2.x, use version `0.3.0` of this plugin. Version `1.x` and beyond only
 support Hexo v3.x.
 
-### Contents
-- [**Screenshots**](#screenshots)
-- [**Quickstart**](#quickstart)
-- [**Credits**](#credits)
 
-# Local use vs deployment
-This plugin was originally designed as a local editor -- you run hexo locally, use `hexo-admin` to author posts, and then use `hexo generate` or `hexo deploy` to send the generated static HTML files up to github pages or some other static server.
-
-However, `hexo-admin` can be run on your live blog, as long as you're using a non-static hosting service such as Heroku, DigitalOcean, etc. Static hosting services such as Github pages and Surge.sh does not support running hexo-admin from your live site.
-If you're using Hexo admin from your live blog, you should definitely set up a password (see below) -- otherwise anyone will be able to edit your content.
-
-# Screenshots
+## Screenshots
 ![posts view](docs/pasted-0.png?raw=true)
 
-![editor view](docs/pasted-1.png?raw=true)
+![editor view](docs/Snip20180305_4.png?raw=true)
 
-# Quickstart
+## Quickstart
+
 ### 1. Setup hexo & create a blog
 ```sh
 npm install -g hexo
@@ -74,15 +125,3 @@ metadata:
 ```
 You can provide default values that will be used to initialize the metadata
 of a new post. These can be either primitives or arrays.
-
-### 6. Contribute!
-- let me know how it can be improved in the [github
-  issues](https://github.com/jaredly/hexo-admin/issues)
-- [fork](https://github.com/jaredly/hexo-admin) and pull-request
-
-# Credits
-
-built with ❤ by [Jared Forsyth](http://jaredly.github.io)
-([@jaredforsyth](http://twitter.com/jaredforsyth)) using
-[react](http://facebook.github.io/react), [browserify](
-http://browserify.org), and [less](http://lesscss.org).

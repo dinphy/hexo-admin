@@ -142,6 +142,21 @@ module.exports = function (app, hexo) {
     })
   }
 
+  //TODO, get gallery data
+  use('gallery/list', function (req, res) {
+    var json = 'hexo-admin-ehc-images.json';
+    var file = path.join(hexo.source_dir, json);
+    var content = fs.readFileSync(file);
+    res.done(JSON.parse(content));
+  });
+  //TODO, save new uploads to json
+  use('gallery/set', function (req, res) {
+    res.done({
+      result: 'success'
+    })
+  });
+
+
   use('tags-categories-and-metadata', function (req, res) {
     res.done(tagsCategoriesAndMetadata())
   });
@@ -357,12 +372,12 @@ module.exports = function (app, hexo) {
       imagePrefix = settings.options.imagePrefix ? settings.options.imagePrefix : imagePrefix
     }
 
-    var msg = 'upload successful'
-    var filename = imagePrefix + i +'.png'
+    var msg = 'uploaded!'
     var i = 0
-    while (fs.existsSync(path.join(hexo.source_dir, imagePath, filename))) {
-      i += 1
+    while (fs.existsSync(path.join(hexo.source_dir, imagePath, imagePrefix + i +'.png'))) {
+      i +=1
     }
+    var filename = path.join(imagePrefix + i +'.png')
     if (req.body.filename) {
       var givenFilename = req.body.filename
       // check for png ending, add it if not there
@@ -395,32 +410,31 @@ module.exports = function (app, hexo) {
       if (err) {
         console.log(err)
       }
-      var imageSrc = path.join(hexo.config.root + filename).replace(/\\/g, '/')
+      console.log('hexo.config.url: '+hexo.config.url);
       hexo.source.process().then(function () {
         res.done({
-          src: imageSrc,
+          // FIXME, use image URL to display image rather than relative path @2018/02/04
+          src: hexo.config.url + filename,
+          // src: path.join(hexo.config.root + filename),
           msg: msg
         })
       });
     })
   });
 
+  // using deploy to generate static pages
+  // @2018/01/22
   use('deploy', function(req, res, next) {
-    if (req.method !== 'POST') return next()
-    if (!hexo.config.admin || !hexo.config.admin.deployCommand) {
-      return res.done({error: 'Config value "admin.deployCommand" not found'});
-    }
-    try {
-      deploy(hexo.config.admin.deployCommand, req.body.message, function(err, result) {
-        console.log('res', err, result);
-        if (err) {
-          return res.done({error: err.message || err})
-        }
-        res.done(result);
-      });
-    } catch (e) {
-      console.log('EEE', e);
-      res.done({error: e.message})
-    }
+    if (req.method !== 'POST') return next();
+
+    hexo.call('generate').then(function(){
+      var result = {status: 'success', stdout: 'Done!'};
+      hexo.exit();
+      res.done(result);
+    }).catch(function(err){
+      return hexo.exit(err);
+    });
+
   });
+
 }

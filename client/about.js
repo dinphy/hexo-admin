@@ -10,6 +10,7 @@ var About = React.createClass({
         <ul>
           <li><a href="http://hexo.io">Hexo 官网</a></li>
           <li><a href="https://github.com/jaredly/hexo-admin-plugin">本插件的 Github</a></li>
+          <li><a href="https://github.com/dinphy/hexo-admin">Dinphy 汉化修改版本</a></li>
         </ul>
       </p>
     </div>
@@ -17,4 +18,3 @@ var About = React.createClass({
 })
 
 module.exports = About
-
