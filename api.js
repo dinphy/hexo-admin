@@ -208,18 +208,8 @@ module.exports = function (app, hexo) {
   });
 
   use('pages/list', function (req, res) {
-   var page = hexo.model('Page').filter(function(item) {
-    return item.path && /^pages\//.test(item.path)
-   })
-   res.done(page.toArray().map(addIsDraft).map(function(item) { 
-      return {
-        isDraft: item.isDraft,
-        title: item.title,
-        date: item.date,
-        path: item.path,
-        _id: item._id
-      };
-   }));
+   var page = hexo.model('Page')
+   res.done(page.toArray().map(addIsDraft));
   });
 
   use('pages/new', function (req, res, next) {
@@ -288,15 +278,7 @@ module.exports = function (app, hexo) {
 
   use('posts/list', function (req, res) {
    var post = hexo.model('Post')
-   res.done(post.toArray().map(addIsDraft).map(function(item) { 
-      return {
-        isDraft: item.isDraft,
-        title: item.title,
-        date: item.date,
-        path: item.path,
-        _id: item._id
-      };
-   }));
+   res.done(post.toArray().map(addIsDraft));
   });
 
   use('posts/new', function (req, res, next) {
@@ -443,22 +425,16 @@ module.exports = function (app, hexo) {
   // using deploy to generate static pages
   // @2018/01/22
   use('deploy', function(req, res, next) {
-    if (req.method !== 'POST') return next()
-    if (!hexo.config.admin || !hexo.config.admin.deployCommand) {
-      return res.done({error: 'Config value "admin.deployCommand" not found'});
-    }
-    try {
-      deploy(hexo.config.admin.deployCommand, req.body.message, function(err, result) {
-        console.log('res', err, result);
-        if (err) {
-          return res.done({error: err.message || err})
-        }
-        res.done(result);
-      });
-    } catch (e) {
-      console.log('EEE', e);
-      res.done({error: e.message})
-    }
+    if (req.method !== 'POST') return next();
+
+    hexo.call('generate').then(function(){
+      var result = {status: 'success', stdout: 'Done!'};
+      hexo.exit();
+      res.done(result);
+    }).catch(function(err){
+      return hexo.exit(err);
+    });
+
   });
 
 }
