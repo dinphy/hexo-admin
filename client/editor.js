@@ -93,7 +93,8 @@ var Editor = React.createClass({
 
   handleImgSelect: function (img) {
     this.setState({
-      mdImg: '![image](/images/'+img+')',
+      //mdImg: '![image](/images/'+img+')',
+	  mdImg: '![](https://raw.githubusercontent.com/dinphy/dinphy.github.io/master/images/'+img+')',
     });
   },
 
