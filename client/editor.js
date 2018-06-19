@@ -123,17 +123,17 @@ var Editor = React.createClass({
           </button>)}
 
           {!this.props.isPage && (this.props.isDraft ?
-          <button className="editor_remove" title="Remove"
+          <button className="editor_remove" title="删除"
                   onClick={this.props.onRemove}>
             <i className="fa fa-trash-o" aria-hidden="true"/>
           </button> :
-          <button className="editor_remove" title="Can't Remove Published Post"
+          <button className="editor_remove" title="无法删除已发布的文章"
                   onClick={this.props.onRemove} disabled>
             <i className="fa fa-trash-o" aria-hidden="true"/>
           </button>)}
 
           {!this.props.isPage &&
-          <button className="editor_checkGrammar" title="Check for Writing Improvements"
+          <button className="editor_checkGrammar" title="检查写作改进"
                   onClick={this.onCheckGrammar}>
             <i className="fa fa-check-circle-o"/>
           </button>}

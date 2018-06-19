@@ -68,10 +68,10 @@ var PopGallery = React.createClass({
     return (
       <div className="gallery">
         <div className="arrow-up"></div>
-        <div className="header">Image Selector</div>
+        <div className="header">图像选择器</div>
         <div className="grid">
           <Dropzone onDrop={this.onDrop} className="dropzone" accept="image/jpeg, image/png">
-            <div className="drop-zone-txt">Try dropping some files here, or click to select files to upload.</div>
+            <div className="drop-zone-txt">点击上传新的图像，或选择已有的图像</div>
           </Dropzone>
           {this.state.files.length > 0 ? <div>
 
@@ -79,7 +79,7 @@ var PopGallery = React.createClass({
               this.state.files.map((file) => {
                 return (
                   <div className="img-ctnr" onClick={this._onChange.bind(null, file.name)}>
-                    {file.preview?<div className="sending"><span>sending...</span></div>:null}
+                    {file.preview?<div className="sending"><span>发送...</span></div>:null}
                     <img src={file.preview || '/images/'+file.name} className="img-cell"/>
                   </div>
                 );

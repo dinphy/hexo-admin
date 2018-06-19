@@ -203,7 +203,7 @@ var ConfigDropper = React.createClass({
         "config-dropper": true,
         "config-dropper--open": this.state.open
       })}
-           title="Settings">
+           title="文章属性设置">
       <div className="config-dropper_handle"
            onClick={this._toggleShow}>
         <i className="fa fa-gear"/>
