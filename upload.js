@@ -8,7 +8,7 @@ var multipart = require('connect-multiparty');
 var Promise = require("bluebird"); // @2018/02/23
 
 module.exports = function (app, hexo) {
-  var imagesFile = path.join(hexo.source_dir, 'hexo-admin-images.json');
+  var imagesFile = path.join(hexo.source_dir, 'hexo-admin-ehc-images.json');
   // default images;
   var imagesData = [
     {name: 'DASHENG-900x700-1.png', date: 1518959551960},
