@@ -1,14 +1,14 @@
 {
   "name": "hexo-admin",
   "version": "2.3.0",
-  "description": "Adds an admin section to the hexo server",
+  "description": "Hexo Admin 中文版本",
   "main": "index.js",
   "scripts": {
     "prepublish": "gulp build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaredly/hexo-admin.git"
+    "url": "https://github.com/dinphy/hexo-admin.git"
   },
   "keywords": [
     "hexo",
@@ -19,9 +19,9 @@
   "author": "Jared Forsyth <jared@jaredforsyth.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jaredly/hexo-admin/issues"
+    "url": "https://github.com/dinphy/hexo-admin/issues"
   },
-  "homepage": "http://jaredly.github.io/hexo-admin/",
+  "homepage": "https://dinphy.github.io/",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.5.0",

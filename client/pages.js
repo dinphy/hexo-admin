@@ -65,7 +65,7 @@ var Pages = React.createClass({
                 {page.title}
               </span>
               <span className="posts_post-date">
-                {moment(page.date).format('MMM Do YYYY')}
+                {moment(page.date).format('YYYY-MM-DD')}
               </span>
               <a className='posts_perma-link' target="_blank" href={rootPath + '/' + page.path}>
                 <i className='fa fa-link'/>
@@ -81,7 +81,7 @@ var Pages = React.createClass({
         'posts_display': true,
         'posts_display--draft': current.isDraft
       })}>
-        {current.isDraft && <div className="posts_draft-message">Draft</div>}
+        {current.isDraft && <div className="posts_draft-message">草稿</div>}
         <Rendered
           ref="rendered"
           className="posts_content"

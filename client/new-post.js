@@ -12,7 +12,7 @@ var NewPost = React.createClass({
     return {
       showing: false,
       loading: true,
-      text: 'Untitled'
+      text: '请输入文件名'
     }
   },
 
@@ -45,7 +45,7 @@ var NewPost = React.createClass({
     e.preventDefault();
     this.setState({loading: true, showing: false})
     api.newPost(this.state.text).then((post) => {
-      this.setState({showing: false, text: 'Untitled'})
+      this.setState({showing: false, text: '请输入文章标题'})
       this.props.onNew(post)
     }, (err) => {
       console.error('Failed! to make post', err)
@@ -67,7 +67,7 @@ var NewPost = React.createClass({
       return <div className="new-post" onClick={this._onShow}>
         <div className="new-post_button">
           <i className="fa fa-plus"/>{' '}
-          New Post
+          新建文章
         </div>
       </div>
     }

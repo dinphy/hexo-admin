@@ -45,11 +45,11 @@ var Deploy = React.createClass({
     } else if (this.state.status === 'success') {
       body = (
         <div>
-          <h4>Std Output</h4>
+          <h4>控制台输出</h4>
           <pre>
             {this.state.stdout}
           </pre>
-          <h4>Std Error</h4>
+          <h4>控制台错误</h4>
           <pre>
             {this.state.stderr}
           </pre>
@@ -60,17 +60,17 @@ var Deploy = React.createClass({
     return (
       <div className="deploy" style={divStyle}>
         <p>
-          Type a message here and hit `deploy` to run your deploy script.
+          在这里输入您的发布消息并按 `发布` 按钮来发布你的博客。
         </p>
         <form className='deploy_form' onSubmit={this.handleSubmit}>
           <input
             type="text"
             className="deploy_message"
             value={this.state.message}
-            placeholder="Deploy/commit message"
+            placeholder="发布消息(可空)"
             onChange={e => this.setState({message: e.target.value})}
           />
-          <input type="submit" value="Deploy" />
+          <input type="submit" value="发布" />
         </form>
         {body}
       </div>

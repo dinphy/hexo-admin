@@ -90,7 +90,7 @@ var AutoList = React.createClass({
   },
 
   render: function () {
-    var values = this.props.values.concat(['Add new'])
+    var values = this.props.values.concat(['添加'])
     return <div className="autolist">
       {values.map((item, i) =>
         <div key={item} className="autolist_item">

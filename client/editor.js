@@ -76,10 +76,10 @@ var Editor = React.createClass({
           onChange={this.props.onChange}/>}
         {!this.props.isPage && (this.props.isDraft ?
           <button className="editor_publish" onClick={this.props.onPublish}>
-            Publish
+            发布
           </button> :
           <button className="editor_unpublish" onClick={this.props.onUnpublish}>
-            Unpublish
+            取消发布
           </button>)}
           {!this.props.isPage && (this.props.isDraft ?
           <button className="editor_remove" title="Remove"
@@ -117,9 +117,9 @@ var Editor = React.createClass({
         <div className="editor_display">
           <div className="editor_display-header">
             <span className="editor_word-count">
-              {this.props.wordCount} words
+              {this.props.wordCount} 个字
             </span>
-            Preview
+            预览
             {' '}<a className="editor_perma-link" href={this.state.previewLink} target="_blank">
               <i className="fa fa-link"/> {this.state.previewLink}
             </a>

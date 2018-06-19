@@ -10,9 +10,9 @@ var NewPage = React.createClass({
 
   getInitialState: function () {
     return {
-      showing: false,
+      showing: true,
       loading: true,
-      text: 'Untitled'
+      text: '请输入文件名'
     }
   },
 
@@ -46,7 +46,7 @@ var NewPage = React.createClass({
     e.preventDefault();
     this.setState({loading: true, showing: false})
     api.newPage(this.state.text).then((page) => {
-      this.setState({showing: false, text: 'Untitled'})
+      this.setState({showing: false, text: '请输入文件名'})
       this.props.onNew(page)
     }, (err) => {
       console.error('Failed! to make page', err)
@@ -68,7 +68,7 @@ var NewPage = React.createClass({
       return <div className="new-post" onClick={this._onShow}>
         <div className="new-post_button">
           <i className="fa fa-plus"/>{' '}
-          New page
+          新建页面
         </div>
       </div>
     }

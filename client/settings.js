@@ -18,61 +18,60 @@ var Settings = React.createClass({
       name: 'lineNumbers',
       enableOptions: {editor: {lineNumbers: true}},
       disableOptions: {editor: {lineNumbers: false}},
-      label: 'Enable line numbering.'
+      label: '启用行号'
     });
 
     var SpellCheck = SettingsCheckbox({
       name: 'spellcheck',
       enableOptions: {editor: {inputStyle: 'contenteditable', spellcheck: true}},
       disableOptions: {editor: {inputStyle: null, spellcheck: false}},
-      label: 'Enable spellchecking. (buggy on older browsers)'
+      label: '开启拼写检查。 （在旧版浏览器上的越野车）'
     });
 
     var AskImageFilename = SettingsCheckbox({
       name: 'askImageFilename',
-      label: 'Always ask for filename.',
+      label: '总是询问文件名。',
       style: {width: '300px', display: 'inline-block'}
     });
 
     var OverwriteImages = SettingsCheckbox({
       name: 'overwriteImages',
-      label: 'Overwrite images if file already exists.',
+      label: '如果文件已经存在，则覆盖图像。',
       style: {width: '425px', display: 'inline-block'}
     })
 
     var ImagePath = SettingsTextbox({
       name: 'imagePath',
       defaultValue: '/images',
-      label: 'Image directory'
+      label: '图像目录'
     });
 
     var ImagePrefix = SettingsTextbox({
       name: 'imagePrefix',
       defaultValue: 'pasted-',
-      label: 'Image filename prefix'
+      label: '图像文件名前缀'
     });
 
     return (
       <div className="settings" style={divStyle}>
-        <h1>Settings</h1>
+        <h1>设置</h1>
         <p>
-          Set various settings for your admin panel and editor.
+          为管理面板和编辑器设置各种设置。
         </p>
         <p>
-          Hexo admin can be secured with a password.
-          {' '}<Link to='auth-setup'>Setup authentification here.</Link>
+          Hexo管理员可以使用密码进行保护。
+          {' '}<Link to='auth-setup'>在此设置认证。</Link>
         </p>
         <hr />
 
-        <h2>Editor Settings</h2>
+        <h2>编辑器设置</h2>
         {LineNumbers}
         {SpellCheck}
         <hr />
 
-        <h2>Image Pasting Settings</h2>
+        <h2>图像粘贴设置</h2>
         <p>
-          Hexo-admin allows you to paste images you copy from the web or elsewhere directly
-          into the editor. Decide how you'd like to handle the pasted images.
+          Hexo-admin允许您粘贴从网络或其他地方直接复制的图像进入编辑器。 决定你想如何处理粘贴的图像。
         </p>
         {AskImageFilename}
         {OverwriteImages}
